@@ -8,6 +8,7 @@ const Items = ({ itemTitle, itemPrice, itemImgUrl }) => {
       <h4>{itemTitle}</h4>
       <p>{itemPrice}</p>
     </div>
+
   );
 };
 

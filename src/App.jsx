@@ -14,12 +14,37 @@ import About from './components/About';
 import Event from './components/Event';
 import data from './assets/data/data';
 import Items from './components/Items';
+import axios from 'axios';
 
 
 function App() {
 
   const nav = useNavigate();
-  const [items, setItems] = useState(data)
+  const [items, setItems] = useState(data);
+  const [count ,setCount ] = useState(1);
+
+  const onSubmit = (e) => {
+    setCount((prev)=>prev+1);
+    if(count === 1){
+      axios.get('https://codingapple1.github.io/shop/data2.json')
+      .then((data) => {
+        const copy2 = items.concat(data.data);
+        console.log(copy2);
+        setItems(copy2);
+        setLoading(false)
+      })
+    }else if(count === 2){
+      axios.get('https://codingapple1.github.io/shop/data3.json')
+      .then((data) => {
+        const copy2 = items.concat(data.data);
+        console.log(copy2);
+        setItems(copy2);
+        setLoading(false)
+      })
+    }else if(count === 3){ 
+      alert('no more!');
+    }
+  }
 
   return (
     <div className="app">
@@ -64,6 +89,7 @@ function App() {
                 )}
               </div>
             </div>
+            <button onClick={onSubmit}>get</button>
           </>
         }></Route>
         <Route path='/detail/:id' element={<Detail shoes={items} />} />

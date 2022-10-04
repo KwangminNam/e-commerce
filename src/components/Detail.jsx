@@ -3,7 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import data from '../assets/data/data';
 import { useParams } from 'react-router-dom';
 
-const Detail = (props) => {
+const Detail = ({shoes}) => {
 
   const { id } = useParams();
   const parseId = parseInt(id);
@@ -31,7 +31,7 @@ const Detail = (props) => {
   },[])
 
 
-  const findProdcut = props.shoes.find((item) => {
+  const findProdcut = shoes.find((item) => {
     return item.id === parseId;
   })
 

@@ -21,14 +21,6 @@ const data = [
     content : "Born in the States",
     price : 130000,
     url: '../public/imgs/banana.jpeg'
-  },
-
-  {
-    id : 3,
-    title : "red Yordan",
-    content : "Born in the States",
-    price : 10000,
-    url: '../public/imgs/banana.jpeg'
   }
 ] 
 
