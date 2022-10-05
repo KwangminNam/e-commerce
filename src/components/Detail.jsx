@@ -1,34 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import data from '../assets/data/data';
 import { useParams } from 'react-router-dom';
+import { Nav } from 'react-bootstrap';
 
-const Detail = ({shoes}) => {
-
+const Detail = ({ shoes }) => {
   const { id } = useParams();
   const parseId = parseInt(id);
 
   const [event, setEvent] = useState(true);
-  const [input , setInput ] = useState("");
-  const onChange = (e)=>{
-    setInput(e.target.value);
-  }
-
-
-
-  useEffect(()=>{
-    if(isNaN(input)==true){
-      alert('nope')
-    }
-    console.log("text!")
-  },[input])
+  const [tab , setTab ] = useState(0);
 
   useEffect(() => {
     console.log("시작!")
-    setTimeout(()=>{
+    setTimeout(() => {
       setEvent(false)
-    },2000)
-  },[])
+    }, 2000)
+  }, [])
 
 
   const findProdcut = shoes.find((item) => {
@@ -37,7 +24,6 @@ const Detail = ({shoes}) => {
 
   return (
     <div className="container">
-      <input type="text"   value={input} onChange={onChange}/>
       <div className="row">
         {event &&
           <div className="alert alert-warning">
@@ -54,8 +40,44 @@ const Detail = ({shoes}) => {
           <button className='btn btn-danger'>btn!</button>
         </div>
       </div>
+
+      <Nav variant="tabs" defaultActiveKey="link0">
+        <Nav.Item>
+          <Nav.Link eventKey="link0" onClick={() => setTab(0)} >버튼0</Nav.Link>
+        </Nav.Item>
+        <Nav.Item>
+          <Nav.Link eventKey="link1" onClick={() => setTab(1)} >버튼1</Nav.Link>
+        </Nav.Item>
+        <Nav.Item>
+          <Nav.Link eventKey="link2" onClick={() => setTab(2)} >버튼2</Nav.Link>
+        </Nav.Item>
+      </Nav>
+      <Tab
+        프롭탭네임={tab}
+      />
     </div>
   );
 };
+
+function Tab ({프롭탭네임}) {
+  
+  const [css ,setCss] = useState('');
+
+  useEffect(()=>{
+    setInterval(()=>{
+      setCss('end');
+    },50)
+    return ()=>{
+      setCss('');
+    }
+  },[프롭탭네임])
+
+  return (
+    <div className={`start ${css}`}>
+      {[<div>0000</div>,<div>1111</div>,<div>2222</div>][프롭탭네임]}
+    </div>
+  )
+}
+
 
 export default Detail;

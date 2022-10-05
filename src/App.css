@@ -10,3 +10,12 @@
 .row h4 , .row p{
   text-align: center;
 }
+
+.start {
+  opacity: 0;
+}
+
+.start.end{
+  opacity: 1;
+  transition: all .3s ease-in-out;
+}
