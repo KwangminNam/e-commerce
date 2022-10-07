@@ -10,42 +10,37 @@ import { Routes, Route, Link, useNavigate, Outlet } from 'react-router-dom'
 import Detail from './components/Detail';
 import Row from './components/Row';
 import ErrorPage from './components/ErrorPage';
-import About from './components/About';
 import Event from './components/Event';
 import data from './assets/data/data';
 import Items from './components/Items';
 import axios from 'axios';
-
-export const UseContextBlock = createContext();
+import Cart from './components/Cart';
 
 function App() {
 
   const nav = useNavigate();
   const [items, setItems] = useState(data);
-  const [count ,setCount ] = useState(1);
-  
-  const [stock] = useState([1,2,3]);
-  const [name] = useState(['kwangmin','mina'])
+  const [count, setCount] = useState(1);
 
   const onSubmit = (e) => {
-    setCount((prev)=>prev+1);
-    if(count === 1){
+    setCount((prev) => prev + 1);
+    if (count === 1) {
       axios.get('https://codingapple1.github.io/shop/data2.json')
-      .then((data) => {
-        const copy2 = items.concat(data.data);
-        console.log(copy2);
-        setItems(copy2);
-        setLoading(false)
-      })
-    }else if(count === 2){
+        .then((data) => {
+          const copy2 = items.concat(data.data);
+          console.log(copy2);
+          setItems(copy2);
+          setLoading(false)
+        })
+    } else if (count === 2) {
       axios.get('https://codingapple1.github.io/shop/data3.json')
-      .then((data) => {
-        const copy2 = items.concat(data.data);
-        console.log(copy2);
-        setItems(copy2);
-        setLoading(false)
-      })
-    }else if(count === 3){ 
+        .then((data) => {
+          const copy2 = items.concat(data.data);
+          console.log(copy2);
+          setItems(copy2);
+          setLoading(false)
+        })
+    } else if (count === 3) {
       alert('no more!');
     }
   }
@@ -95,14 +90,8 @@ function App() {
             <button onClick={onSubmit}>get</button>
           </>
         }></Route>
-        <Route path='/detail/:id' element=
-        
-          {
-          <UseContextBlock.Provider value={{stock,name}}>
-            <Detail shoes={items} />
-          </UseContextBlock.Provider>  
-          }
-         />
+        <Route path='/detail/:id' element={<Detail shoes={items} />}/>
+        <Route path='/cart' element={<Cart/>}/>
         <Route path='/event' element={<Event />}>
           <Route path='one' element={<div>first order</div>} />
           <Route path='two' element={<div>second order</div>} />

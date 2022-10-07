@@ -2,7 +2,6 @@ import React, { useContext, useEffect, useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useParams } from 'react-router-dom';
 import { Nav } from 'react-bootstrap';
-import {UseContextBlock} from './../App';
 
 const Detail = ({ shoes }) => {
   const { id } = useParams();
@@ -10,11 +9,6 @@ const Detail = ({ shoes }) => {
 
   const [event, setEvent] = useState(true);
   const [tab , setTab ] = useState(0);
-
-  // ContextAPI
-  const { stock , name }  = useContext(UseContextBlock);
-
-  console.log(useContext(UseContextBlock));
   
   useEffect(() => {
     console.log("시작!")
@@ -45,8 +39,6 @@ const Detail = ({ shoes }) => {
           <p>{findProdcut.price}</p>
           <button className='btn btn-danger'>btn!</button>
         </div>
-        {stock}
-        {name}
       </div>
 
       <Nav variant="tabs" defaultActiveKey="link0">
