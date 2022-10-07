@@ -5,7 +5,7 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import MainBg from './components/MainBg';
-import { useState } from 'react';
+import { createContext, useState } from 'react';
 import { Routes, Route, Link, useNavigate, Outlet } from 'react-router-dom'
 import Detail from './components/Detail';
 import Row from './components/Row';
@@ -16,13 +16,16 @@ import data from './assets/data/data';
 import Items from './components/Items';
 import axios from 'axios';
 
-
+export const UseContextBlock = createContext();
 
 function App() {
 
   const nav = useNavigate();
   const [items, setItems] = useState(data);
   const [count ,setCount ] = useState(1);
+  
+  const [stock] = useState([1,2,3]);
+  const [name] = useState(['kwangmin','mina'])
 
   const onSubmit = (e) => {
     setCount((prev)=>prev+1);
@@ -92,9 +95,14 @@ function App() {
             <button onClick={onSubmit}>get</button>
           </>
         }></Route>
-        <Route path='/detail/:id' element={<Detail shoes={items} />} />
-
-
+        <Route path='/detail/:id' element=
+        
+          {
+          <UseContextBlock.Provider value={{stock,name}}>
+            <Detail shoes={items} />
+          </UseContextBlock.Provider>  
+          }
+         />
         <Route path='/event' element={<Event />}>
           <Route path='one' element={<div>first order</div>} />
           <Route path='two' element={<div>second order</div>} />

@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useParams } from 'react-router-dom';
 import { Nav } from 'react-bootstrap';
+import {UseContextBlock} from './../App';
 
 const Detail = ({ shoes }) => {
   const { id } = useParams();
@@ -10,6 +11,11 @@ const Detail = ({ shoes }) => {
   const [event, setEvent] = useState(true);
   const [tab , setTab ] = useState(0);
 
+  // ContextAPI
+  const { stock , name }  = useContext(UseContextBlock);
+
+  console.log(useContext(UseContextBlock));
+  
   useEffect(() => {
     console.log("시작!")
     setTimeout(() => {
@@ -24,13 +30,13 @@ const Detail = ({ shoes }) => {
 
   return (
     <div className="container">
-      <div className="row">
+      <div className="row" style={{flexDirection:"column" ,alignItems:"center"}}>
         {event &&
           <div className="alert alert-warning">
             if you buy in 2seconds, it will be 20% discount
           </div>
         }
-        <div className="col-md-6">
+        <div className="col-md-6" style={{textAlign:"center"}}>
           <img src={findProdcut.url} alt="" />
         </div>
         <div className="col-md-6 mt-4">
@@ -39,6 +45,8 @@ const Detail = ({ shoes }) => {
           <p>{findProdcut.price}</p>
           <button className='btn btn-danger'>btn!</button>
         </div>
+        {stock}
+        {name}
       </div>
 
       <Nav variant="tabs" defaultActiveKey="link0">
@@ -64,10 +72,10 @@ function Tab ({프롭탭네임}) {
   const [css ,setCss] = useState('');
 
   useEffect(()=>{
-    setInterval(()=>{
+    setTimeout(()=>{
       setCss('end');
     },50)
-    return ()=>{
+    return ()=>{  
       setCss('');
     }
   },[프롭탭네임])
