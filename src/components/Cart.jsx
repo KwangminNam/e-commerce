@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Table } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux';
-import { changeName } from '../store';
+import { changeName  , changeAge , increase} from '../store';
 
 
 const Cart = () => {
@@ -14,7 +14,8 @@ const Cart = () => {
 
   return (
     <div>
-      <div>{user}</div>
+      <div>{user.name} , {user.age}</div>
+      <button onClick={()=>{dispatch(changeAge(100))}}>age!</button>
       <Table>
         <thead>
           <tr>
@@ -31,7 +32,7 @@ const Cart = () => {
                 <td>{item.id}</td>
                 <td>{item.name}</td>
                 <td>{item.count}</td>
-                <td><button onClick={()=>{dispatch(changeName())}}>+</button></td>
+                <td><button onClick={()=>{dispatch(increase(item.id))}}>+</button></td>
               </tr>
             )
           })}
