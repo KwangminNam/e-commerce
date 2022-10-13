@@ -7,31 +7,32 @@ import { createProduct} from '../store';
 
 const Detail = ({ shoes }) => {
   const { id } = useParams();
-  const parseId = parseInt(id);
+  // const parseId = parseInt(id);
 
   const [event, setEvent] = useState(true);
   const [tab , setTab ] = useState(0);
 
   const dispatch = useDispatch();
-  
-  useEffect(() => {
-    console.log("시작!")
-    setTimeout(() => {
-      setEvent(false)
-    }, 2000)
-  }, [])
 
 
   const findProdcut = shoes.find((item) => {
-    return item.id === parseId;
+    return item.id == id;
   })
+
+  useEffect(() => {
+    let out = localStorage.getItem('watched');
+    out = JSON.parse(out)
+    out.push(findProdcut.id)
+    localStorage.setItem('watched',JSON.stringify(out))
+  }, [])
+
 
   return (
     <div className="container">
       <div className="row" style={{flexDirection:"column" ,alignItems:"center"}}>
         {event &&
           <div className="alert alert-warning">
-            if you buy in 2seconds, it will be 20% discount
+            if you buy in11111 2seconds, it will be 20% discount
           </div>
         }
         <div className="col-md-6" style={{textAlign:"center"}}>

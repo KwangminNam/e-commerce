@@ -5,7 +5,7 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import MainBg from './components/MainBg';
-import { createContext, useState } from 'react';
+import { createContext, useEffect, useState } from 'react';
 import { Routes, Route, Link, useNavigate, Outlet } from 'react-router-dom'
 import Detail from './components/Detail';
 import Row from './components/Row';
@@ -45,6 +45,13 @@ function App() {
     }
   }
 
+  useEffect(()=>{
+    localStorage.setItem('watched',JSON.stringify( [] ))
+  },[])
+
+  
+
+
   return (
     <div className="app">
       <Navbar bg="light" expand="lg">
@@ -65,6 +72,9 @@ function App() {
         <Route path='/' element={
           <>
             <div className='main-bg'></div>
+            <div className="ui" style={{position:"absolute" ,right:0 , top:0 , background:"#fff" ,border:"2px solid red",width:"150px" ,height:"200px"}}>
+              <div>test</div>
+            </div>
             <div className="container">
               <div className="row">
                 {items.map((item) =>
@@ -73,6 +83,7 @@ function App() {
                     itemImgUrl={item.url}
                     itemTitle={item.title}
                     itemPrice={item.price}
+                    each={`/detail/${item.id}`}
                   />
                 )}
               </div>
